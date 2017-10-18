@@ -1,29 +1,13 @@
+var ant;
 function setup(){
-    var width = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
-
-    var height = window.innerHeight
-        || document.documentElement.clientHeight
-        || document.body.clientHeight;
-
-    createCanvas(width, height);
+    //Setup the 'playground'
+    createCanvas(window.innerWidth, window.innerHeight);
+    ant = new Ant(width/2,height-20);   //Set the class Ant() to the variable ant and set its position to middle of the window-botton
 }
 
 function draw(){
-
-    background(0);
-    var c = color("lime");  
-    fill(c);  
-    noStroke(); 
-    ellipse(width/2, 30, 30, 30);
+    //Start de drawing
+    background('rgba(0,0,0,0.3)');  //The rgba code is used tho add the 'path' effect, it can be removed in next updates
+    ant.draw();     //Call the class.function to draw 'ant'
+    ant.update();   //Call the class.function to update the state of the ant(s)
 }
-
-//function plantarUnPino(){
-    // Voy al pino y cago
-    // @params: 
-    //  - macarrones: pasta con tomate
-    //  - yogur: leche rara
-    //  @returns:
-    //   - trunyo
-//}
