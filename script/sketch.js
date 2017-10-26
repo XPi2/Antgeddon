@@ -2,7 +2,7 @@ var ant;
 function setup(){
     //Setup the 'playground'
     createCanvas(window.innerWidth, window.innerHeight);
-    ant = new Ant(width/2,height-20);   //Set the class Ant() to the variable ant and set its position to middle of the window-botton
+    ant = new Ant(width/2,height/2);   //Set the class Ant() to the variable ant and set its position to middle of the window-botton
 }
 
 function draw(){
