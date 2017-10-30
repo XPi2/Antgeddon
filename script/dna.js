@@ -1,10 +1,12 @@
-DNA(){
-    randomSeed(random());
-    for(i=0; i<1000; i++)
-        vector.DNA[i] = random(-1,1);
-        console.log(vector.DNA[i]);
-    //
-    //initial fitness definition = distance of each ant to the food
-    //
-    //initial evolution algorithm = delete worst 30% of population + clone best 5% of the generation + mate randomly the rest
+class DNA{
+    constructor(){
+        this.genes = [];
+        console.log(maxframe);
+
+        for(var i=0; i<maxframe ; i++){
+            this.genes[i] = p5.Vector.random2D();
+            this.genes[i].setMag(0.1);
+        }
+    }
+
 }
