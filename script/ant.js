@@ -1,10 +1,10 @@
 class Ant{
     constructor(){
         //This 'fuciton' sets the characteristics of the Ant.class
-        this.pos = createVector(width/2,height*2/3)
+        this.pos = createVector(width/2,height*4/5)
         this.color = "magenta";
         this.diameter = 30;
-        this.speed = createVector();
+        this.speed = createVector(0,random(-1.2));
         this.acc = createVector();
         //this.speed = createVector();
         //this.count = 0
@@ -15,10 +15,10 @@ class Ant{
     }
 
     update(){
-        this.applyForce(0.01);
+        this.applyForce(random(-0.1,0.1));
         //this.count++
         this.speed.add(this.acc);
-        this.pos.add(this.speed);
+        this.pos.add(this.speed,this.speed);
         this.acc.mult(0);
     }
 
@@ -27,7 +27,7 @@ class Ant{
         //strokeWeight(4);
         translate(this.pos.x, this.pos.y);
         rotate(this.speed.heading());
-        rect(CENTER);
+        rectMode(CENTER);
         noStroke();
         fill(color(this.color));
         rect(0, 0, this.diameter, this.diameter*0.5);
