@@ -1,13 +1,17 @@
-var ant;
+var ants = []; //Array of the population
 function setup(){
     //Setup the 'playground'
     createCanvas(window.innerWidth, window.innerHeight);
-    ant = new Ant(width/2,height/2);   //Set the class Ant() to the variable ant and set its position to middle of the window-botton
+    for (var i=0; i<30; i++) {
+        ants.push(new Ant());
+    } // Create population (30 now)
 }
 
 function draw(){
     //Start de drawing
-    background('rgba(0,0,0,0.3)');  //The rgba code is used tho add the 'path' effect, it can be removed in next updates
-    ant.draw();     //Call the class.function to draw 'ant'
-    ant.update();   //Call the class.function to update the state of the ant(s)
+    background('rgba(0,0,0,0.1)');  //The rgba code is used tho add the 'path' effect, it can be removed in next updates
+    for (var i=0; i<ants.length; i++) {
+        ants[i].draw();     //Call the class.function to draw the ants
+        ants[i].update();   //Call the class.function to update the state of the ants
+    }
 }
