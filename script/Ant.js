@@ -2,24 +2,25 @@ class Ant{
     constructor(dna){
         //This 'funciton' sets the characteristics of the Ant.class
         this.pos = createVector(width/2,height*9/10)
-        this.color = "magenta";
+            this.color = "magenta";
         this.size = 15;
-        //if(dna === undefined)
+        if(dna === undefined)
             this.dna = new DNA();
-        //else
-        //    this.dna = dna
+        else
+            this.dna = dna;
         this.speed = createVector(); //Setted the inicial speed to go up
         this.acc = createVector(0,0);
-        this.count = 0
+        this.count = 0;
     }
 
     applyForce(force){
-        this.acc.add(force)
+        this.acc.add(force);
     } // 'Funciton' to clean the code, the foce modify the path
 
     update(){
+        this.coun++;
         this.applyForce(this.dna.genes[this.count]); //This will be related to the DNA of each ant
-        this.count++
+        population.count++;
         this.speed.add(this.acc); //Adds the new aceleration to the speed of the Ant
         this.pos.add(this.speed,this.speed); //Set the new post of the ant
         this.acc = createVector(0,0); //This multiplier avoid to acumulate aceleration
@@ -35,7 +36,7 @@ class Ant{
         noStroke();
         fill(color(this.color));
         //rect(0, 0, this.size, this.size)
-        triangle(-this.size/2, 0, this.size/2, 0, 0, -this.size)
+        triangle(-this.size/2, 0, this.size/2, 0, 0, -this.size);
         pop();
     }
     reboot(){
