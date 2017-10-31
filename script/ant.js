@@ -3,7 +3,7 @@ class Ant{
         //This 'funciton' sets the characteristics of the Ant.class
         this.pos = createVector(width/2,height*9/10)
         this.color = "magenta";
-        this.diameter = 15;
+        this.size = 15;
         //if(dna === undefined)
             this.dna = new DNA();
         //else
@@ -29,11 +29,13 @@ class Ant{
         push();
         //strokeWeight(4);
         translate(this.pos.x, this.pos.y); //Move the ant to its new pos
-        rotate(radians(this.speed.heading())); //Orientate the ant to its moving vector
+        //rectMode(CENTER);
+        rotate(this.speed.heading()+PI/2); //Orientate the ant to its moving vector
          //Set the point of rotation to its center
         noStroke();
         fill(color(this.color));
-        triangle(0, 0, this.diameter, 0, this.diameter/2,-this.diameter);
+        //rect(0, 0, this.size, this.size)
+        triangle(-this.size/2, 0, this.size/2, 0, 0, -this.size)
         pop();
     }
     reboot(){
