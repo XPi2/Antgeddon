@@ -3,7 +3,6 @@ class Population{
         this.popSize = 50;
         this.antpop = [];
         this.bestpop = [];
-        this.fitness = [];
         this.count = 0;
         for (var i=0; i<this.popSize; i++) {
             this.antpop.push(new Ant());
@@ -12,36 +11,38 @@ class Population{
     }
 
     draw(){
-        this.count = this.antpop[0].count;
         for (var i=0; i<this.popSize; i++) {
             this.antpop[i].update();     //Call the class.function to draw the ants
             this.antpop[i].draw();   //Call the class.function to update the state of the ants
         }
-        //if(this.count == maxframe)
-            //this.reboot();
+        this.count = this.antpop[0].count;
+        if(this.count == maxframe)
+            this.reboot();
     }
 
     reboot(){
+        this.fitness = [];
+
         this._individualFitness();
         this._acumulateFitness();
-        //this.selectionFitness();
+        
+        for(var i=0; i < this.popSize; i++){
+            var ran = random(0,1);
+        //    for(var j=0; j < this.popSize; i++){ //Si descomentas esto peta
+        //        console.log(this.fitness[j][2]);
+        //        if(ran < this.fitness[j][2]){
+                    this.bestpop[i] = new Ant(this.antpop[this.fitness[i][0]].dna);
+                    // Ahora mismo simplemente ordena las hormigas de la siguiente generación de mejor a peor
+        //        }
+        //    }
+        }
+
 
         for(var i=0; i < this.popSize; i++){
-            var rand = random();
-            for(var j=0; j < this.popSize; j++){
-                if(rand < this.fitness[j][2]){
-                    //Ant selected
-                    //console.log(this.antpop[this.fitness[j][0]])
-
-                    this.bestpop[i] = new Ant(this.antpop[this.fitness[j][0]].dna);
-
-                    //this.newpopulation[i].reboot();
-                    //Finish the for loop
-                    j = 0;
-                }
-            } 
+            console.log(this.fitness[i][0]);
+            console.log(this.fitness[i][2]);
+            this.antpop[i] = this.bestpop[i];
         }
-        //this.antpop = this.bestpop;
         this.count = 0;
     }
 
@@ -69,8 +70,9 @@ class Population{
             //    this.totalfitness += this.fitness[i][1];
             //console.log("Total fitness =")
             //console.log(this.totalfitness);
+        //console.log(this.fitness);
     }
-
+    
     _acumulateFitness(){
         this.accfitness = 0;
         for(var i=0; i<this.fitness.length ; i++){
@@ -79,23 +81,6 @@ class Population{
             this.fitness[i][2] = this.accfitness;
         }
         // We can check that the array is correctly computed and sorted
-        console.log(this.fitness);
-    }
-
-    selectionFitness(){
-        this.newpopulation = [];
-        for(var i=0; i < this.popSize; i++){
-            var rand = random();
-            for(var j=0; j < this.popSize; j++){
-                if(rand < this.fitness[j][2]){
-                    //Ant selected
-                    this.newpopulation[i] = new Ant(this.population[this.fitness[j][0]].dna);
-                    //this.newpopulation[i].reboot();
-                    //Finish the for loop
-                    j = 0;
-                }
-            } 
-        }
-        this.population = this.newpopulation;
+        //console.log(this.fitness);
     }
 }

@@ -18,7 +18,7 @@ class Ant{
     } // 'Funciton' to clean the code, the foce modify the path
 
     update(){
-        this.coun++;
+        this.count++;
         this.applyForce(this.dna.genes[this.count]); //This will be related to the DNA of each ant
         population.count++;
         this.speed.add(this.acc); //Adds the new aceleration to the speed of the Ant
