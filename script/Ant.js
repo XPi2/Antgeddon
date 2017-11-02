@@ -7,10 +7,11 @@ class Ant{
         if(dna === undefined)
             this.dna = new DNA();
         else
-            this.dna = dna;
+            this.dna = new DNA(dna);
         this.speed = createVector(); //Setted the inicial speed to go up
         this.acc = createVector(0,0);
         this.count = 0;
+        this.amutateprob = 0.5;
     }
 
     applyForce(force){
@@ -36,7 +37,7 @@ class Ant{
         noStroke();
         fill(color(this.color));
         //rect(0, 0, this.size, this.size)
-        triangle(-this.size/2, 0, this.size/2, 0, 0, -this.size);
+        triangle(-this.size/3, 0, this.size/3, 0, 0, -this.size);
         pop();
     }
     reboot(){
@@ -44,5 +45,15 @@ class Ant{
         this.speed = createVector();
         this.acc = createVector(0,0);
         this.count = 0;
+    }
+
+    matching(ant){
+        this.dna.mix(ant.dna);
+    }
+
+    mutate(){
+        var mrand = random(0,1);
+        if(mrand < this.amutateprob)
+            this.dna.geneticMutate();
     }
 }

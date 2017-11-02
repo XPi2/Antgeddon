@@ -1,12 +1,13 @@
 class Population{
     constructor(){
-        this.popSize = 500;
+        this.popSize = 200;
         this.antpop = [];
         this.count = 0;
         for (var i=0; i<this.popSize; i++) {
             this.antpop.push(new Ant());
         } // Create population 
-        console.log(this.antpop)
+        console.log(this.antpop);
+        this.amatching = 0.1;
     }
 
     draw(){
@@ -26,18 +27,22 @@ class Population{
         this._individualFitness();
         this._acumulateFitness();
 
+        //Selection
         for(var i=0; i < this.popSize; i++){
             var ran = random();
-            for(var j=0; j < this.popSize; j++){ //Si descomentas esto peta
+            for(var j=0; j < this.popSize; j++){
                 if(ran < this.fitness[j][2]){
                     bestpop[i] = new Ant(this.antpop[this.fitness[j][0]].dna);
                     j=this.popSize;
                 }
-                
+
             }
         }
 
+        this.matching(); 
+
         for(var i=0; i < this.popSize; i++){
+            bestpop[i].mutate();
             this.antpop[i] = bestpop[i];
         }
         this.count = 0;
@@ -70,6 +75,17 @@ class Population{
             //This is the adder of the fitness of the previus ants of the population
             accfitness += this.fitness[i][1];
             this.fitness[i][2] = accfitness;
+        }
+    }
+    matching(){
+        for(var i=0;i<this.popsize/2;i++){
+            var rand = random();
+            if(rand < this.matchingProb){
+                //Pick an ant
+                var father = random(this.ants);
+                var mother = random(this.ants);
+                mother.matching(father);
+            }
         }
     }
 }
