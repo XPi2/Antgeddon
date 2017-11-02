@@ -1,17 +1,21 @@
-var ants = []; //Array of the population
+var maxframe;
+var population;
+var stop = 0;
 function setup(){
     //Setup the 'playground'
     createCanvas(window.innerWidth, window.innerHeight);
-    for (var i=0; i<30; i++) {
-        ants.push(new Ant());
-    } // Create population (30 now)
+    //Foodcoordinates(window.innerWidh/2, window.innerHeight*1/10);
+    maxframe = 400;
+    population = new Population();
+    food = new Goal(window.innerWidth/2, window.innerHeight*1/9);
 }
 
 function draw(){
-    //Start de drawing
-    background('rgba(0,0,0,0.1)');  //The rgba code is used tho add the 'path' effect, it can be removed in next updates
-    for (var i=0; i<ants.length; i++) {
-        ants[i].draw();     //Call the class.function to draw the ants
-        ants[i].update();   //Call the class.function to update the state of the ants
+    if(stop == 0){
+        //Start de drawing
+        background('rgba(0,0,0,0.1)');  //The rgba code is used tho add the 'path' effect, it can be removed in next updates
+        food.draw();
+        population.draw();
     }
+    else;
 }
