@@ -4,6 +4,8 @@ class Population{
         this.antpop = [];
         this.count = 0;
         this.popID = 1;
+        this.popfitness;
+        this.bestpopfitness;
         for (var i=0; i<this.popSize; i++) {
             this.antpop.push(new Ant());
         } // Create population 
@@ -18,7 +20,7 @@ class Population{
             this.antpop[i].update();     //Call the class.function to draw the ants
             this.antpop[i].draw();   //Call the class.function to update the state of the ants
         }
-        for(var i=0;i<wallsnumber;i++)
+        for(var i=0;i<walls.length;i++)
             walls[i].draw();
         this.count = this.antpop[0].count;
         if(this.count == maxframe)
@@ -72,6 +74,13 @@ class Population{
             return a[1] - b[1];
         });
         this.fitness.reverse(); //This reorder the array in fitnees decrecent
+        // Now save interesting data to display
+        this.popfitness = int(totalfitness*1000);
+        if(this.popID != 1 && this.popfitness >= this.bestpopfitness)
+            this.bestpopfitness = this.popfitness;
+        else if(this.popID == 1)
+            this.bestpopfitness = this.popfitness;
+        //this.bestantfitness = int(this.fitness[0][1]*10000);
     }
 
     _acumulateFitness(){

@@ -1,6 +1,6 @@
 class Obstacle{
     constructor(){
-        this.color = color('rgb(0,102,204)');
+        this.color = color('rgb(0,204,102)');
         this.obstx = random(window.innerWidth);
         this.obsty = random(window.innerHeight/3, window.innerHeight*3/4);
         this.sizex = 80;
@@ -14,7 +14,7 @@ class Obstacle{
 
     draw(){
         fill(this.color);
-        rectMode(CENTER);
+        //rectMode(CENTER);
         noStroke();
         rect(this.pos.x, this.pos.y, this.sizex*2, this.sizey*2);
     }

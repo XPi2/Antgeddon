@@ -7,9 +7,8 @@ var walls = [];
 function setup(){
     //Setup the 'playground'
     createCanvas(window.innerWidth, window.innerHeight);
-    //Foodcoordinates(window.innerWidh/2, window.innerHeight*1/10);
-    maxframe = 200;
-    wallsnumber = 5;
+    maxframe = 360;
+    wallsnumber = 20;
     population = new Population();
     food = new Goal(window.innerWidth/2, window.innerHeight*1/9);
     //buttonStop = createButton('Stop');
@@ -35,7 +34,19 @@ function reboot(){
 function display(){
     textSize(18);
     fill(color('rgb(0,102,204)'));
-    text('Frame: '+ population.count, window.innerWidth-53, window.innerHeight-50, 120, 20);
-    //fill('#ED225D');
-    text('Population: '+ population.popID, window.innerWidth-86, window.innerHeight-30, 120, 20);
+    if(population.popfitness != undefined)
+        text('Fitness Population: '+ population.popfitness,
+            window.innerWidth-212, 22,
+            360, 20);
+    if(population.bestpopfitness != undefined)
+        text('Best Fitness: '+ population.bestpopfitness,
+            window.innerWidth-162, 2,
+            360, 20);
+    text('Population: '+ population.popID,
+        window.innerWidth-148, window.innerHeight-30,
+        120, 20);
+    textSize(12);
+    text('Frame: '+ population.count,
+        2, 2,
+        120, 20);
 }

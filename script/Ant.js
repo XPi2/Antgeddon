@@ -2,7 +2,6 @@ class Ant{
     constructor(dna){
         //This 'funciton' sets the characteristics of the Ant.class
         this.pos = createVector(width/2,height*9/10)
-        this.color = "magenta";
         this.size = 15;
         if(dna === undefined)
             this.dna = new DNA();
@@ -29,15 +28,15 @@ class Ant{
             this.alive = false;
         }
         else
-            for(var i=0;i<wallsnumber;i++){
-                if(this.pos.x > walls[i].initWidth &&
-                    this.pos.x < walls[i].finWidth &&
-                    this.pos.y > walls[i].initHeight &&
-                    this.pos.y < walls[i].finHeight){
-                    this.alive = false; //WHY THIS DO NOT FUCKING WORK!!!
-                }
-            }
+            for(var i=0; i<walls.length; i++){
+                if(this.pos.x > walls[i].pos.x &&
+                    this.pos.x < walls[i].pos.x+walls[i].sizex*2 &&
+                    this.pos.y < walls[i].pos.y+walls[i].sizey*2 &&
+                    this.pos.y > walls[i].pos.y-walls[i].sizey/3) 
+                    this.alive = false;
+            }// Kill the ant if its inside a wall 
     }
+
     update(){
         this.count++;
         population.count++;
@@ -52,13 +51,13 @@ class Ant{
 
     draw() {
         push();
-        //strokeWeight(4);
+        strokeWeight(0.5);
         translate(this.pos.x, this.pos.y); //Move the ant to its new pos
         //rectMode(CENTER);
         rotate(this.speed.heading()+PI/2); //Orientate the ant to its moving vector
         //Set the point of rotation to its center
-        noStroke();
-        fill(color(this.color));
+        stroke(color('rgb(10,10,10)'));
+        fill(color('rgba(10,10,10, 0.2)'));
         //rect(0, 0, this.size, this.size)
         triangle(-this.size/3, 0, this.size/3, 0, 0, -this.size);
         pop();
