@@ -3,11 +3,14 @@ class Population{
         this.popSize = 200;
         this.antpop = [];
         this.count = 0;
+        this.popID = 1;
         for (var i=0; i<this.popSize; i++) {
             this.antpop.push(new Ant());
         } // Create population 
         console.log(this.antpop);
         this.amatching = 0.1;
+        for(var i=0;i<wallsnumber;i++)
+            walls[i] = new Obstacle();
     }
 
     draw(){
@@ -15,6 +18,8 @@ class Population{
             this.antpop[i].update();     //Call the class.function to draw the ants
             this.antpop[i].draw();   //Call the class.function to update the state of the ants
         }
+        for(var i=0;i<wallsnumber;i++)
+            walls[i].draw();
         this.count = this.antpop[0].count;
         if(this.count == maxframe)
             this.reboot();
@@ -46,6 +51,7 @@ class Population{
             this.antpop[i] = bestpop[i];
         }
         this.count = 0;
+        this.popID++;
     }
 
     _individualFitness(){

@@ -28,14 +28,15 @@ class Ant{
         else if(this.pos.x < 10 || this.pos.x > window.innerWidth-15 || this.pos.y > window.innerHeight-15 || this.pos.y < 10){
             this.alive = false;
         }
-        else for(var i=0;i<wallsnumber;i++){
-            if(this.pos.x > walls[i].initWidth &&
-                this.pos.x < walls[i].finWidth &&
-                this.pos.y > walls[i].initHeight &&
-                this.pos.y < walls[i].finHeight){
-                this.alive = false; //WHY THIS DO NOT FUCKING WORK!!!
+        else
+            for(var i=0;i<wallsnumber;i++){
+                if(this.pos.x > walls[i].initWidth &&
+                    this.pos.x < walls[i].finWidth &&
+                    this.pos.y > walls[i].initHeight &&
+                    this.pos.y < walls[i].finHeight){
+                    this.alive = false; //WHY THIS DO NOT FUCKING WORK!!!
+                }
             }
-        }
     }
     update(){
         this.count++;
