@@ -1,6 +1,6 @@
 class DNA{
     constructor(dna){
-        this.mutateprob = 0.1;
+        this.mutateprob = 0.05;
         this.genes = [];
         var newgenes = [];
 
@@ -25,7 +25,7 @@ class DNA{
         var mid = floor(random(lifespan));
 
         for(var i=0; i<lifespan; i++){
-            if(i<lifespan){
+            if(i<mid){
                 mother[i] = this.genes[i];
                 father[i] = dna.genes[i];
             }else{
