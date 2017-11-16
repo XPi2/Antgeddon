@@ -2,7 +2,7 @@ class Ant{
     constructor(dna){
         //This 'funciton' sets the characteristics of the Ant.class
         this.pos = createVector(width/2,height*9/10)
-        this.size = 15;
+        this.size = 15*respScale;
         if(dna === undefined)
             this.dna = new DNA();
         else
@@ -19,12 +19,12 @@ class Ant{
         this.acc.add(force);
     } // 'Funciton' to clean the code, the foce modify the path
 
-    checkColision(){ //FINISH THIS
+    checkColision(){
         if(dist(this.pos.x,this.pos.y,food.goalx,food.goaly) <= (food.size*0.5)){
             this.alive = false;
             this.eat = true;
         }
-        else if(this.pos.x < 10 || this.pos.x > window.innerWidth-15 || this.pos.y > window.innerHeight-15 || this.pos.y < 10){
+        else if(this.pos.x < pgWidth/100 || this.pos.x > pgWidth*99/100 || this.pos.y > pgHeight*99/100 || this.pos.y < pgHeight/100){
             this.alive = false;
         }
         else

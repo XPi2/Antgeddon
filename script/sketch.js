@@ -1,16 +1,26 @@
+// Global variables:
 var maxframe;
 var wallsnumber;
 var population;
 var stop = 0;
-var buttonStop;
+var pgWidth;
+var pgHeight;
+var respScale;
+//var buttonStop;
 var walls = [];
 function setup(){
     //Setup the 'playground'
-    createCanvas(window.innerWidth, window.innerHeight);
+    pgWidth = window.innerWidth*3/4;
+    pgHeight = window.innerHeight*68/70;
+    //The  kay of the real responsive canvas
+    respScale = window.innerWidth/1920;
+
+    createCanvas( pgWidth, pgHeight);
+
     maxframe = 360;
-    wallsnumber = 20;
+    wallsnumber = 16;
     population = new Population();
-    food = new Goal(window.innerWidth/2, window.innerHeight*1/9);
+    food = new Goal(pgWidth/2, pgHeight*1/10);
     //buttonStop = createButton('Stop');
     //button.position( 30, 30);
     //button.mousePressed(stop = 1)
@@ -32,21 +42,53 @@ function reboot(){
 }
 
 function display(){
-    textSize(18);
+    var boxsize = 360*respScale;
+    var boxsizey = 20*respScale;
+    
+    textAlign(RIGHT);
     fill(color('rgb(0,102,204)'));
-    if(population.popfitness != undefined)
-        text('Fitness Population: '+ population.popfitness,
-            window.innerWidth-212, 22,
-            360, 20);
-    if(population.bestpopfitness != undefined)
-        text('Best Fitness: '+ population.bestpopfitness,
-            window.innerWidth-162, 2,
-            360, 20);
-    text('Population: '+ population.popID,
-        window.innerWidth-148, window.innerHeight-30,
-        120, 20);
-    textSize(12);
+    if(respScale >=0.3){
+        textSize(18*respScale);
+        boxsize = 360*respScale;
+        boxsizey = 20*respScale;
+
+        if(population.popfitness != undefined)
+            text('Fitness Population: '+ population.popfitness,
+                pgWidth-boxsize, boxsizey*0.2,
+                boxsize, boxsizey);
+        if(population.bestpopfitness != undefined)
+            text('Best Fitness: '+ population.bestpopfitness,
+                pgWidth-boxsize, boxsizey*1.2, boxsize, boxsizey);
+        textAlign(BOTTOM)
+        text('Population: '+ population.popID,
+            pgWidth-boxsize, pgHeight-boxsizey, boxsize, boxsizey);
+    }
+    else{
+        textSize(6);
+        boxsize = 120;
+        boxsizey = 7;
+        if(population.popfitness != undefined)
+            text('Fitness Population: '+ population.popfitness,
+                pgWidth-boxsize, boxsizey*0.2,
+                boxsize, boxsizey);
+        if(population.bestpopfitness != undefined)
+            text('Best Fitness: '+ population.bestpopfitness,
+                pgWidth-boxsize, boxsizey*1.2, boxsize, boxsizey);
+        textAlign(BOTTOM)
+        text('Population: '+ population.popID,
+            pgWidth-boxsize, pgHeight-boxsizey, boxsize, boxsizey);
+    }
+    if(respScale >=0.3)
+        textSize(12*respScale);
+    else
+        textSize(4);
+    textAlign(LEFT,TOP);
     text('Frame: '+ population.count,
-        2, 2,
-        120, 20);
+        boxsizey*0.2, boxsizey*0.2,
+        boxsize, boxsizey);
+    //Framework
+    noFill();
+    strokeWeight(0.5);
+    stroke(color('rgb(1,1,1)'));
+    rect(0.5,0.5, pgWidth-1, pgHeight-1);
 }

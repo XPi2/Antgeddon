@@ -4,7 +4,12 @@ class Goal{
         this.colors = color('rgb(205, 153, 0)')
         this.goalx = x;
         this.goaly = y;
-        this.size = 60;
+        //This adjust the size
+        //with a minimun of 20px
+        if(respScale >= 0.3)
+            this.size = 60*respScale;
+        else
+            this.size = 20;
         this.pos = createVector(this.goalx,this.goaly);
     }
 
