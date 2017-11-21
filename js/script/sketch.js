@@ -10,12 +10,12 @@ var respScale;
 var walls = [];
 function setup(){
     //Setup the 'playground'
-    pgWidth = window.innerWidth*3/4;
-    pgHeight = window.innerHeight*68/70;
+    
+    window.onload();
     //The  kay of the real responsive canvas
     respScale = window.innerWidth/1920;
-
-    createCanvas( pgWidth, pgHeight);
+    thisCanvas = createCanvas( pgWidth, pgHeight);
+    //thisCanvas.parent('game');
 
     maxframe = 360;
     wallsnumber = 16;
@@ -30,7 +30,7 @@ function setup(){
 function draw(){
     if(stop == 0){
         //Start de drawing
-        background('rgb(255, 255, 244)'); //Rgba code is used tho add the 'path' effect, it can be removed in next updates
+        background('#fdf6e3'); //Rgba code is used tho add the 'path' effect, it can be removed in next updates
         food.draw();
         population.draw();
         display();
@@ -41,16 +41,22 @@ function draw(){
 function reboot(){
 }
 
+window.onload = window.onresize = function() {
+    //var canvas = document.getElementById('canvas');
+    pgWidth = window.innerWidth;
+    pgHeight = window.innerHeight * 0.9;
+}
+
 function display(){
-    var boxsize = 360*respScale;
-    var boxsizey = 20*respScale;
-    
+    var boxsize;
+    var boxsizey;
+
     textAlign(RIGHT);
-    fill(color('rgb(0,102,204)'));
-    if(respScale >=0.3){
-        textSize(18*respScale);
+    fill(color('rgb( 105, 105, 104)'));
+    if(respScale >=0.5){
+        textSize(20*respScale);
         boxsize = 360*respScale;
-        boxsizey = 20*respScale;
+        boxsizey = 22*respScale;
 
         if(population.popfitness != undefined)
             text('Fitness Population: '+ population.popfitness,
@@ -61,12 +67,12 @@ function display(){
                 pgWidth-boxsize, boxsizey*1.2, boxsize, boxsizey);
         textAlign(BOTTOM)
         text('Population: '+ population.popID,
-            pgWidth-boxsize, pgHeight-boxsizey, boxsize, boxsizey);
+            pgWidth-boxsize, pgHeight-boxsizey*1.2, boxsize, boxsizey);
     }
     else{
-        textSize(6);
-        boxsize = 120;
-        boxsizey = 7;
+        textSize(8);
+        boxsize = 180;
+        boxsizey = 10;
         if(population.popfitness != undefined)
             text('Fitness Population: '+ population.popfitness,
                 pgWidth-boxsize, boxsizey*0.2,
@@ -79,9 +85,9 @@ function display(){
             pgWidth-boxsize, pgHeight-boxsizey, boxsize, boxsizey);
     }
     if(respScale >=0.3)
-        textSize(12*respScale);
+        textSize(16*respScale);
     else
-        textSize(4);
+        textSize(8);
     textAlign(LEFT,TOP);
     text('Frame: '+ population.count,
         boxsizey*0.2, boxsizey*0.2,
@@ -89,6 +95,6 @@ function display(){
     //Framework
     noFill();
     strokeWeight(0.5);
-    stroke(color('rgb(1,1,1)'));
+    stroke(color('rgb( 155, 155, 144)'));
     rect(0.5,0.5, pgWidth-1, pgHeight-1);
 }
